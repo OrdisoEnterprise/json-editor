@@ -1,0 +1,19 @@
+@startuml
+
+left to right direction
+
+actor User as g
+
+package Json-Editor {
+  usecase "Add Config Models" as UC0
+  usecase "Update Config" as UC1
+  usecase "Validate Config" as UC2
+  usecase "Generate Code" as UC3
+}
+
+g --> UC0
+g --> UC1
+g --> UC2
+g --> UC3
+@enduml
+

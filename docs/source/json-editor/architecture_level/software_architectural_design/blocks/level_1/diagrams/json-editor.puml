@@ -1,0 +1,177 @@
+@startuml
+
+class JsonString {
+  +__init__(title, obj, root)
+  +onTextChanged()
+}
+
+class JsonNumber {
+  +__init__(title, obj, root)
+  +timerEvent(event)
+  +fresh()
+  +is_valid(value)
+  +onTextChanged(value)
+}
+
+class JsonInteger {
+  +__init__(title, obj, root)
+  +is_valid(value)
+}
+
+class JsonEnumRefString {
+  +__init__(title, obj, root)
+  +timerEvent(event)
+  +initItems()
+  +onTextChanged(text)
+}
+
+class JsonEnumRefInteger {
+  +__init__(title, obj, root)
+  +onTextChanged(text)
+}
+
+class JsonEnumString {
+  +__init__(title, obj, root)
+  +initItems()
+  +onTextChanged(text)
+}
+
+class JsonEnumInteger {
+  +__init__(title, obj, root)
+  +onTextChanged(text)
+}
+
+class JsonBool {
+  +__init__(title, obj, root)
+  +initItems()
+  +onTextChanged(text)
+}
+
+class JsonMapString {
+  +__init__(title, obj, root)
+  +initItems()
+  +onTextChanged(text)
+}
+
+class JsonAction {
+  +__init__(text, parent)
+  +onAction()
+}
+
+class UIGroup {
+  +__init__(wd, parent)
+  +timerEvent(event)
+}
+
+class JsonBase {
+  +__init__(title, schema, root, parent)
+  +preproc(url)
+  +is_enabled(attr=None)
+  +find(url)
+  +reload()
+  +reloadUI(wConfig)
+  +toJSON()
+  +isList()
+  +isObj()
+  +clear()
+  +get_desc(attr)
+  +get_prop(attr)
+  +auto_field(attr)
+  +get(attr)
+  +set(attr, value)
+  +name()
+  +onItemSelectionChanged()
+  +addChildObj(obj)
+  +reloadUI()
+}
+
+class JsonBasic {
+  +__init__(title, schema, root, parent)
+  +reload()
+  +display(value)
+  +set(attr, value)
+  +toJSON()
+  +createUI()
+  +reloadUI()
+}
+
+class JsonObject {
+  +__init__(title, schema, root, parent=None)
+  +extend(ext, silent=False)
+  +rm_extend()
+  +reload()
+  +isObj()
+  +toJSON()
+  +createUI(prefix='')
+  +reloadUI()
+}
+
+class JsonArray {
+  +__init__(title, schema, root, parent=None)
+  +name()
+  +isList()
+  +reload()
+  +listMaxAllowed()
+  +toJSON()
+  +onAction_Add(what)
+  +createUI()
+  +reloadUI()
+}
+
+class JsonObjectTree {
+  -root
+  -title
+  -schema
+  -objMap{}
+  -setHeaderLabel
+  +__init__(schema, parent=None)
+  +toJSON()
+  +onItemSelectionChanged()
+  +onAction_Delete(what)
+  +onAction(text)
+}
+
+class JsonModule {
+  +__init__(schema, main)
+  +creActions()
+  +toJSON()
+  +find(url)
+  +onAction(text)
+  +showConfig(obj)
+}
+
+
+JsonString -u-|> QLineEdit
+JsonNumber -u-|> JsonString
+JsonInteger -u-|> JsonNumber
+JsonEnumRefString -u-|> QComboBox
+JsonEnumRefInteger -u-|> JsonEnumRefString
+JsonEnumString -u-|> QComboBox
+JsonEnumInteger -u-|> JsonEnumString
+JsonBool -u-|> QComboBox
+JsonMapString -u-|> QComboBox
+
+JsonAction -u-|> QAction
+UIGroup -u-|> QScrollArea
+JsonBase -u-|> QTreeWidgetItem
+JsonBasic -u-|> JsonBase
+JsonObject -u-|> JsonBase
+JsonArray -u-|> JsonBase
+
+JsonObjectTree -u-|> QTreeWidget
+JsonModule -u-|> QMainWindow
+
+JsonModule "1" *-- "1" JsonObjectTree
+JsonArray "1" *-- "*" JsonBase
+JsonObject "1" *-- "*" JsonBase
+
+JsonModule "1" *-- "*" JsonAction
+JsonObjectTree "1" *-- "*" JsonBase
+
+JsonBasic --> QLineEdit
+JsonBasic --> QComboBox
+JsonObject --> QLineEdit
+JsonObject --> QComboBox
+
+
+@enduml

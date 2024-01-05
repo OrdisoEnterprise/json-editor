@@ -1,0 +1,118 @@
+{
+  "$defs": {
+    "GlobalPaths": {
+      "properties": {
+        "root_dir": {
+          "default": "/default/root",
+          "title": "Root Dir",
+          "type": "string"
+        },
+        "src_dir": {
+          "default": "/default/src",
+          "title": "Src Dir",
+          "type": "string"
+        },
+        "doc_dir": {
+          "default": "/default/doc",
+          "title": "Doc Dir",
+          "type": "string"
+        },
+        "build_dir": {
+          "default": "/default/build",
+          "title": "Build Dir",
+          "type": "string"
+        }
+      },
+      "title": "GlobalPaths",
+      "type": "object"
+    },
+    "Project": {
+      "properties": {
+        "name": {
+          "default": "Default Project",
+          "title": "Name",
+          "type": "string"
+        },
+        "team": {
+          "default": "Default Team",
+          "title": "Team",
+          "type": "string"
+        },
+        "mail": {
+          "default": "default@example.com",
+          "title": "Mail",
+          "type": "string"
+        }
+      },
+      "title": "Project",
+      "type": "object"
+    },
+    "SW_Component": {
+      "properties": {
+        "name": {
+          "default": "Default Component",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "default": "v0.0.0",
+          "title": "Version",
+          "type": "string"
+        },
+        "tests_env": {
+          "items": {
+            "$ref": "#/$defs/TestEnvironment"
+          },
+          "title": "Tests Env",
+          "type": "array"
+        }
+      },
+      "required": [
+        "tests_env"
+      ],
+      "title": "SW_Component",
+      "type": "object"
+    },
+    "TestEnvironment": {
+      "properties": {
+        "name": {
+          "default": "DefaultTestEnv",
+          "title": "Name",
+          "type": "string"
+        },
+        "execution_path": {
+          "default": "/test/execution/path",
+          "title": "Execution Path",
+          "type": "string"
+        }
+      },
+      "title": "TestEnvironment",
+      "type": "object"
+    }
+  },
+  "description": "This is the description of the main model",
+  "properties": {
+    "project": {
+      "$ref": "#/$defs/Project"
+    },
+    "paths": {
+      "$ref": "#/$defs/GlobalPaths"
+    },
+    "components": {
+      "items": {
+        "$ref": "#/$defs/SW_Component"
+      },
+      "title": "Components",
+      "type": "array"
+    },
+    "fecha_entrega": {
+      "title": "Fecha Entrega",
+      "type": "string"
+    }
+  },
+  "required": [
+    "fecha_entrega"
+  ],
+  "title": "SW_Repo",
+  "type": "object"
+}

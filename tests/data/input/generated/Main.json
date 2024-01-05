@@ -1,0 +1,26 @@
+{
+  "class": "Main",
+  "project": {
+    "name": "project",
+    "team": "Default Team",
+    "mail": "default@example.com"
+  },
+  "paths": {
+    "root_dir": "/default/root",
+    "src_dir": "/default/src",
+    "doc_dir": "/default/doc",
+    "build_dir": "/default/build"
+  },
+  "components": [
+    {
+      "name": "claudia",
+      "version": "v0.0.1",
+      "tests_env": [
+        {
+          "name": "el_test_de_claudia",
+          "execution_path": "/test/execution/path"
+        }
+      ]
+    }
+  ]
+}

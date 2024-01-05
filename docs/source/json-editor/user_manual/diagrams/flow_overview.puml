@@ -1,0 +1,26 @@
+@startuml
+
+
+component model <<pydantic>>
+component model_validator
+component code_generator
+
+component user_interface
+
+file json_schema <<json>>
+file configuration <<json>>
+file code
+
+model_validator ..> model: uses
+configuration -[#blue,dotted,thickness=6]-> model_validator : uses
+code_generator ..> model: uses
+configuration -[#blue,dotted,thickness=6]-> code_generator : uses
+
+model -[#blue,dotted,thickness=6]-> json_schema: generates
+
+json_schema -[#blue,dotted,thickness=6]-> user_interface : uses
+user_interface -[#blue,dotted,thickness=6]-> configuration : generates
+
+code_generator -[#blue,dotted,thickness=6]-> code: generates
+
+@enduml
